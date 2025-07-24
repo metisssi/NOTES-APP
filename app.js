@@ -12,7 +12,7 @@ const path = require('path');
 
 const app = express();
 
-// Сессии
+// Session
 app.use(session({
   secret: 'keyboard cat',
   resave: false, 

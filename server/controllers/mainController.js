@@ -8,7 +8,7 @@ exports.homepage = async (req, res) => {
         title: 'NodeJs Notes',
         description: 'Free NodeJS Notes app.',
     }
-    res.render('index', {
+    res.status(200).render('index', {
         locals, 
         layout: '../views/layouts/front-page'
     });
@@ -25,5 +25,5 @@ exports.about = async (req, res) => {
         description: 'Free NodeJS Notes app.',
     }
 
-    res.render('about', locals)
+    res.status(200).render('about', locals)
 }

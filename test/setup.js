@@ -1,22 +1,18 @@
+
+// test/setup.js или прямо в тестовом файле
+
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 
-let mongo;
+let mongoServer;
 
 beforeAll(async () => {
-  mongo = await MongoMemoryServer.create();
-  const uri = mongo.getUri();
-  await mongoose.connect(uri);
-});
-
-afterEach(async () => {
-  const collections = mongoose.connection.collections;
-  for (let key in collections) {
-    await collections[key].deleteMany();
-  }
+  mongoServer = await MongoMemoryServer.create();
+  const uri = mongoServer.getUri();
+  await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 });
 
 afterAll(async () => {
-  await mongoose.connection.close();
-  await mongo.stop();
+  await mongoose.disconnect();
+  await mongoServer.stop();
 });
