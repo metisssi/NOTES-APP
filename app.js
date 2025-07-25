@@ -15,14 +15,16 @@ const app = express();
 // Session
 app.use(session({
   secret: process.env.SESSION_SECRET,
-  resave: false, 
-  saveUninitialized: true, 
-  store: new MongoStore.create({
+  resave: false,
+  saveUninitialized: true,
+  store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI,
-    collectionName: 'sessions'
-  }), 
-}));
-
+    touchAfter: 24 * 3600
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}));git add .
 app.use(passport.initialize()); 
 app.use(passport.session()); 
 
