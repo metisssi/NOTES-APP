@@ -14,13 +14,13 @@ const app = express();
 
 // Session
 app.use(session({
-  secret: 'keyboard cat',
+  secret: process.env.SESSION_SECRET,
   resave: false, 
-  saveUninitialized: false, 
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI
+  saveUninitialized: true, 
+  store: new MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    collectionName: 'sessions'
   }), 
-  cookie: { maxAge: 3600000 }
 }));
 
 app.use(passport.initialize()); 
