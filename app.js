@@ -24,7 +24,7 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
-}));git add .
+}));
 app.use(passport.initialize()); 
 app.use(passport.session()); 
 
